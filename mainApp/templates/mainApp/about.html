@@ -1,0 +1,27 @@
+{% extends "mainApp/wrapper.html" %}
+{% block about %}
+    <!-- Button trigger modal -->
+    <button class="btn btn-info" data-toggle="modal" data-target="#myAbout">
+        about
+    </button>
+
+    <!-- Modal -->
+    <div id="myAbout" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myAbout">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        закрыть
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p> about</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

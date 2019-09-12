@@ -1,0 +1,53 @@
+{% extends "mainApp/wrapper.html" %}
+{% block auth %}
+    <body class="text-center">
+    <div class="text-center">
+        <form class="form-signin" href="{% url 'registration' %}" method="post">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 font-weight-normal">РЕГИСТРАЦИЯ</h1>
+            {% if form1.errors %}
+                <label style="color: red">{{ form1.errors }}</label>
+            {% endif %}
+            <div class="form-group">
+                <label for="name" class="cols-sm-2 control-label">Имя</label>
+                <div class="cols-sm-10">
+                    {{ form1.first_name }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="cols-sm-2 control-label">Почта</label>
+                <div class="cols-sm-10">
+                    {{ form1.email }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="username" class="cols-sm-2 control-label">Логин</label>
+                <div class="cols-sm-10">
+                    {{ form1.username }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="cols-sm-2 control-label">Пароль</label>
+                <div class="cols-sm-10">
+                    {{ form1.password1 }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm" class="cols-sm-2 control-label">Подтверждение пароля</label>
+                <div class="cols-sm-10">
+                    {{ form1.password2 }}
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <button class="btn btn-lg btn-primary" type="submit">Зарегистрироваться</button>
+            </div>
+        </form>
+    </div>
+
+    </body>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "mainApp/wrapper.html" %}
+{% block input %}
+    {% if user.username %}
+        <form action="{% url 'input' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="value_q">Значение силы:</label>
+                <input type="number" class="float" name="value_q" required  min="0" />
+            </div>
+            <div class="form-group">
+                <label for="value_nu">Коэффициент Пуассона:</label>
+                <input type="number" class="float" name="value_nu"  required step="any" min="0"/>
+            </div>
+            <div class="form-group">
+                <label for="value_r">Радиус штампа:</label>
+                <input type="number" class="float" name="value_r" required min="0"/>
+            </div>
+            <div class="form-group">
+                <label for="id_k">Размер матрици по fi:</label>
+                <input type="number" class="int" name="id_k" required  min="0"/>
+                <label for="id_m">Размер матрици по r:</label>
+                <input type="number" class="int" name="id_m" required  min="0"/>
+            </div>
+            {% if error %}
+                <label class="error">{{ error }}</label>
+            {% endif %}
+            <button class="btn btn-lg btn-primary" type="submit">Построить график</button>
+        </form>
+    {% endif %}
+{% endblock %}

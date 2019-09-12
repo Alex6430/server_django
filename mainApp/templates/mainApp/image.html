@@ -1,0 +1,12 @@
+{% extends "mainApp/wrapper.html" %}
+
+{% block image %}
+    <p>график</p>
+    {% if user.username %}
+        <img src="/media/{{ args.path }}" width="500" height="500">
+    {% else %}
+        {% for item in args.pathnew %}
+            <img src="/media/{{ item.images_graph }}" width="500" height="500">
+        {% endfor %}
+    {% endif %}
+{% endblock %}

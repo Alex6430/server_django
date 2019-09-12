@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашняя страница</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" type="text/css">
+</head>
+<body>
+
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <a class="my-0 mr-md-auto font-weight-normal" href="{% url 'index' %}">ГЛАВНАЯ</a>
+    <nav class="my-2 my-md-0 mr-md-3">
+
+        <a class="p-2 text-dark" href="#" role="button" id="dropdownMenuButton"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Помощь
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+{#            <a class="p-2 text-dark" href="{% url 'about' %}">Отправить сообщение</a>#}
+            <a class="dropdown-item" data-toggle="modal" data-target="#helpModal">Помощь</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#aboutModal">О проектe</a>
+        </div>
+
+        {#        <a class="p-2 text-dark" href="{% url 'help' %}">Помощь</a>#}
+        {#        <a class="p-2 text-dark" href="{% url 'about' %}">О проекте</a>#}
+
+        {% if user.username %}
+            <a class="p-2 text-dark" href="{% url 'input' %}">Построить график</a>
+        {% else %}
+            <a class="p-2 text-dark" href="{% url 'imageprint' %}">Графики</a>
+        {% endif %}
+        {% if user.is_superuser %}
+            <a class="p-2 text-dark" href="{% url 'backup' %}">Резервная копия БД</a>
+            <a class="p-2 text-dark" href="{% url 'restore' %}">Востановление БД</a>
+            <a class="p-2 text-dark" href="{% url 'admin' %}">Панель администратора</a>
+        {% endif %}
+    </nav>
+    <div class="top-bar">
+        <section class="top-bar-section">
+            <ul class="right">
+                {% if user.username %}
+                    <a href="{% url 'logout' %}">Выйти ({{ user.username }})</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Войти</a>
+                {% endif %}
+            </ul>
+        </section>
+    </div>
+</div>
+
+<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="aboutModalLabel">О программе</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span>Разработчик: Таранов Алексей Алексеевич</span><br>
+                <span>Группа: 8-3ИНТ-4ДБ-035-15</span><br>
+                <span>Научный руководитель: доктор физ.-мат. наук,
+                    профессор Михайлов Игорь Ефимович</span><br>
+                <span>Преподаватель: Костиков Юрий Александрович</span>
+            </div>
+            <div class="modal-body">
+                <span>Семестровый проект по предмету Компьютерные технологии.</span><br>
+                <span>Численная оптимизация формы круглого штампа.</span><br><br>
+                <span>
+Данная программа предоставляет пользователю инструмент для построения графиков оптимальной формы штампа.
+                    Нахождение оптимальной формы с помощью минимизации функционала соответствующего данной модели.<br><br>
+                    В данной программе реализована возможность просмотра ранее построенных оптимальных форм штампов, и нахождения оптимальной формы штампа по входным данным.<br><br>
+                    Расчеты происходят на сервере, пользователям установлены права доступа с различными возможностями.<br><br>
+
+К преимуществам сервиса стоит отнести:
+<br><br>•	Возможность доступа к данным с любого компьютера, имеющего выход в Интернет;
+
+
+
+<br><br>Стек технологий:
+<br>•	Фреймворк Django, язык программирования Python;
+<br>•	СУБД – MS SQL;
+
+<br><br> Программа позволяет пользователю просматривать графики оптимальной формы штампа. Для использования сервиса, пользователь должен зарегистрироваться. Далее пользователю открывается расширенный функционал с помощью которого можно построить график оптимальной формы штампа по входным данным.
+
+</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="helpModalLabel">О программе</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span>Программа предназначена для определения оптимальной формы круглого штампа.</span><br><br>
+                <span>
+                    Для того чтобы можно было рассчиатать форму крулгого штампа, нужно войти в свой личный кабинет.
+                    Если вы еще не зарегестрированы, то зарегестрироваться.<br><br>
+                    Для построения графика необходмости ввести следующие данные:
+<br><br>•	Значение силы - сила, которую прикладывают на штамп сверху; должна быть целым значением, больше 0
+<br><br>•   Коэффициент Пуассона - зависит от материала, из которого сделан штамп
+<br><br>•   Радиус штампа - должен быть целым знаечнием и больше 0
+<br><br>•   Размер матрицы по fi - количество разбиений по углу
+<br><br>•   Размер матрицы по r - количетсва разбиений ралиуса
+<br><br>•   Размеры матрицы должны быть целыми числами и больше 0.
+
+<br><br>График показывает оптимальную толщину круглого штампа.
+<br><br>Не войдя в свой личный кабинет, можно посмотреть галерею графиков, которые были построены.
+
+</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block input %}
+{% endblock %}
+
+{% block homepage %}
+{% endblock %}
+{% block help %}
+{% endblock %}
+{% block about %}
+{% endblock %}
+
+{% block auth %}
+{% endblock %}
+{% block image %}
+{% endblock %}
+
+{#<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>#}
+
+{#<script src="htpps://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaL"#}
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
